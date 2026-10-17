@@ -46,3 +46,7 @@ export const addBlogLike = (id: number) => {
     blog.likes = blog.likes + 1
   }
 }
+
+export const getFilteredBlogs = (filter: string) => {
+  return blogs.filter(blog => blog.title.toLowerCase().includes(filter.toLowerCase()))
+}

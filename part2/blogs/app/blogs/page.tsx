@@ -1,11 +1,26 @@
 import Link from "next/link"
-import { getBlogs } from "../services/blogs"
+import { getFilteredBlogs, getBlogs } from "../services/blogs"
+import { filterBlogs } from "../actions/blogs"
 
-const Blogs = () => {
-  const blogs = getBlogs()
+export const instant = false
+
+const Blogs = async ({
+    searchParams
+}: {
+    searchParams: Promise<{ filter?: string }>
+}) => {
+  const { filter } = await searchParams
+  const blogs = filter
+    ? getFilteredBlogs(filter)
+    : getBlogs()
+
     return (
     <div>
       <h1>Blogs</h1>
+      <form action={filterBlogs}>
+        <input type="text" name="filter" placeholder="Filter by title" />
+        <button type="submit">Filter</button>
+      </form>
       <ul>
         {blogs.map(blog => (
           <li key={blog.id}>
