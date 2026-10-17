@@ -1,0 +1,38 @@
+const blogs = [
+  { 
+    id: 1,
+    title: "next.js utilizes React Server Components",
+    author: "Jane Doe",
+    url: "https://nextjs.org/docs/basic-features/pages",
+    likes: 10
+  },
+  {
+    id: 2,
+    title: "next.js is built on top of React",
+    author: "John Doe",
+    url: "https://nextjs.org/docs/basic-features/pages",
+    likes: 5
+  },
+  {
+    id: 3,
+    title: "next.js supports both static and dynamic rendering",
+    author: "Jim Doe",
+    url: "https://nextjs.org/docs/basic-features/pages",
+    likes: 3
+  },
+]
+
+let nextId = 4
+
+export const getBlogs = () => {
+  return blogs
+}
+
+export const addBlog = (
+    title: string,
+    author: string,
+    url: string,
+    likes: number
+) => {
+  blogs.push({ id: nextId++, title, author, url, likes })
+}
