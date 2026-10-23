@@ -13,8 +13,8 @@ export const getBlogs = async (filter?: string) => {
   return db.query.blogs.findMany({ orderBy: [desc(blogs.likes), asc(blogs.title)] })
 }
 
-export const addBlog = async (title: string, author: string, url: string) => {
-  await db.insert(blogs).values({ title, author, url })
+export const addBlog = async (title: string, author: string, url: string, userId: number) => {
+  await db.insert(blogs).values({ title, author, url, userId })
 }
 
 export const getBlogById = async (id: number) => {

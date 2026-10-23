@@ -8,6 +8,20 @@
       "when": 1792764172469,
       "tag": "0000_tense_madame_hydra",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1792770642338,
+      "tag": "0001_fresh_lizard",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1792770942943,
+      "tag": "0002_dusty_patch",
+      "breakpoints": true
     }
   ]
 }

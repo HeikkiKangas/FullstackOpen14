@@ -17,6 +17,7 @@ const NewBlog = () => {
             <label>URL:</label>
             <input type="url" id="url" name="url" required />
           </div>
+          <input type="hidden" name="userId" value={1} />
           <button type="submit">Add Blog</button>
         </form>
     </div>
