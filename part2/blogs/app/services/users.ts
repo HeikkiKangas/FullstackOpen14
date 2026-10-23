@@ -1,5 +1,13 @@
 import { db } from "@/db"
+import { eq } from "drizzle-orm"
 
 export const getUsers = async () => {
   return db.query.users.findMany()
+}
+
+export const getUserByUsername = async (username: string) => {
+  return db.query.users.findFirst({
+    where: (users) => eq(users.username, username),
+    with: { blogs: true }
+  })
 }
