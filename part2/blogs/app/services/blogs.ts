@@ -1,52 +1,44 @@
-const blogs = [
-  { 
-    id: 1,
-    title: "next.js utilizes React Server Components",
-    author: "Jane Doe",
-    url: "https://nextjs.org/docs/basic-features/pages",
-    likes: 10
-  },
-  {
-    id: 2,
-    title: "next.js is built on top of React",
-    author: "John Doe",
-    url: "https://nextjs.org/docs/basic-features/pages",
-    likes: 5
-  },
-  {
-    id: 3,
-    title: "next.js supports both static and dynamic rendering",
-    author: "Jim Doe",
-    url: "https://nextjs.org/docs/basic-features/pages",
-    likes: 3
-  },
-]
+import { db } from "@/db"
+import { blogs } from "@/db/schema"
+import { eq, like, desc, asc } from "drizzle-orm"
 
-let nextId = 4
+export const getBlogs = async (filter?: string) => {
+  if (filter) {
+    return db.query.blogs.findMany({
+      where: (blogs) => like(blogs.title, `%${filter}%`),
+      orderBy: [desc(blogs.likes), asc(blogs.title)]
+    })
+  }
 
-export const getBlogs = () => {
-  return [...blogs].sort((a, b) => b.likes - a.likes)
+  return db.query.blogs.findMany({ orderBy: [desc(blogs.likes), asc(blogs.title)] })
 }
 
-export const addBlog = (
-    title: string,
-    author: string,
-    url: string
-) => {
-  blogs.push({ id: nextId++, title, author, url, likes: 0 })
+export const addBlog = async (title: string, author: string, url: string) => {
+  await db.insert(blogs).values({ title, author, url })
 }
 
-export const getBlogById = (id: number) => {
-  return blogs.find(blog => blog.id === id)
+export const getBlogById = async (id: number) => {
+  return db.query.blogs.findFirst({
+    where: eq(blogs.id, id)
+  })
 }
 
-export const addBlogLike = (id: number) => {
-  const blog = blogs.find(blog => blog.id === id)
+export const addBlogLike = async (id: number) => {
+  const blog = await db.query.blogs.findFirst({
+    where: eq(blogs.id, id)
+  })
   if (blog) {
-    blog.likes = blog.likes + 1
+    await db
+    .update(blogs)
+    .set({ likes: blog.likes + 1 })
+    .where(eq(blogs.id, id))
   }
 }
 
-export const getFilteredBlogs = (filter: string) => {
-  return blogs.filter(blog => blog.title.toLowerCase().includes(filter.toLowerCase()))
+/*
+export const getFilteredBlogs = async (filter: string) => {
+  return db.query.blogs.findMany({
+    where: (blogs) => like(blogs.title, `%${filter}%`)
+  })
 }
+*/

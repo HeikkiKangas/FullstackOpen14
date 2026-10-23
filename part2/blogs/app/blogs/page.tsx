@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { getFilteredBlogs, getBlogs } from "../services/blogs"
+import { getBlogs } from "../services/blogs"
 import { filterBlogs } from "../actions/blogs"
 
 export const instant = false
@@ -11,8 +11,8 @@ const Blogs = async ({
 }) => {
   const { filter } = await searchParams
   const blogs = filter
-    ? getFilteredBlogs(filter)
-    : getBlogs()
+    ? await getBlogs(filter)
+    : await getBlogs()
 
     return (
     <div>
