@@ -3,14 +3,20 @@
 import { redirect } from "next/navigation"
 import { addBlog, addBlogLike } from "../services/blogs"
 import { revalidatePath } from "next/cache"
+import { auth } from "@/auth"
 
 export const createBlog = async (formData: FormData) => {
+  const session = await auth()
+  if (!session) {
+    redirect("/login")
+  }
+
   const title = formData.get("title") as string
   const author = formData.get("author") as string
   const url = formData.get("url") as string
-  const userId = Number(formData.get("userId"))
+  //const userId = Number(formData.get("userId"))
 
-  await addBlog(title, author, url, userId)
+  await addBlog(title, author, url)
   revalidatePath("/blogs")
   redirect("/blogs")
 }

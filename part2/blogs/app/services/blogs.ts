@@ -1,6 +1,7 @@
 import { db } from "@/db"
 import { blogs } from "@/db/schema"
 import { eq, like, desc, asc } from "drizzle-orm"
+import { getCurrentUser } from "./session"
 
 export const getBlogs = async (filter?: string) => {
   if (filter) {
@@ -13,8 +14,13 @@ export const getBlogs = async (filter?: string) => {
   return db.query.blogs.findMany({ orderBy: [desc(blogs.likes), asc(blogs.title)] })
 }
 
-export const addBlog = async (title: string, author: string, url: string, userId: number) => {
-  await db.insert(blogs).values({ title, author, url, userId })
+export const addBlog = async (title: string, author: string, url: string) => {
+  const user = await getCurrentUser()
+  if (!user) {
+    throw new Error("User not authenticated")
+  }
+  
+  await db.insert(blogs).values({ title, author, url, userId: user.id })
 }
 
 export const getBlogById = async (id: number) => {
