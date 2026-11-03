@@ -9,11 +9,15 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@material-tailwind/html": "^3.0.0-beta.7",
+    "@material-tailwind/react": "^2.1.10",
     "@neondatabase/serverless": "^1.2.0",
+    "@tailwindcss/postcss": "^4.3.4",
     "bcryptjs": "^3.0.3",
     "drizzle-orm": "^0.45.4",
     "next": "16.4.2",
     "next-auth": "^5.0.0-beta.32",
+    "postcss": "^8.5.32",
     "react": "19.3.0",
     "react-dom": "19.3.0"
   },
@@ -28,7 +32,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.4.2",
     "postgres": "^3.4.9",
-    "tailwindcss": "^4",
+    "tailwindcss": "^4.3.4",
     "typescript": "^5"
   }
 }
