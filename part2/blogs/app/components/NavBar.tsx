@@ -47,7 +47,7 @@ const NavBar = () => {
             }
           </ul>
         </div>
-        <div className="flex shrink-0 items-center gap-3 whitespace-nowrap md:ml-auto">
+        <div className="flex shrink-0 items-center gap-2 whitespace-nowrap md:ml-auto">
           {
             session
               ? <>
@@ -66,7 +66,7 @@ const NavBar = () => {
                   Logout
                 </button>
               </>
-              : <Link href="/login"><button
+              : <><Link href="/login"><button
                 type="button"
                 className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold
                  text-white shadow-sm transition hover:bg-blue-700
@@ -75,6 +75,16 @@ const NavBar = () => {
               >
                 Login
               </button></Link>
+              <Link href="/register"><button
+                type="button"
+                className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold
+                 text-white shadow-sm transition hover:bg-blue-700
+                 focus-visible:outline-2 focus-visible:outline-offset-2
+                 focus-visible:outline-blue-600"
+              >
+                Register
+              </button></Link>
+              </>
           }
         </div>
       </div>

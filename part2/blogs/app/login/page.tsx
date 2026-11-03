@@ -31,7 +31,7 @@ const LoginPage = () => {
     <div className="w-full max-w-sm min-w-[200px] mx-auto">
       {error && <p style={{ backgroundColor: "red" }}>{error}</p>}
       <div className="relative flex flex-col rounded-xl bg-transparent">
-        <h4 className="block text-xl font-medium text-slate-800">
+        <h4 className="block text-xl font-medium text-slate-800 text-center">
           Login
         </h4>
         <form onSubmit={handleSubmit} className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96 mx-auto">
